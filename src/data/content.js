@@ -1,8 +1,9 @@
 export const personal = {
   name: 'Jasir Colovic',
   logoName: 'jasir-colovic',
-  role: 'Software Engineer — Front-end & DevOps',
-  roleShort: 'Front-end & DevOps engineer',
+  role: 'AI Engineer',
+  roleShort: 'AI Engineer',
+  tagline: 'I build LLM solutions that automate real business work.',
   location: 'Sarajevo, Bosnia & Herzegovina',
   coords: '43.85° N, 18.41° E',
   email: 'jasircolovic@gmail.com',

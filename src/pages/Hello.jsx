@@ -27,10 +27,17 @@ export default function Hello() {
           </motion.h1>
           <motion.h2
             variants={fadeUpItem}
-            className="text-xl md:text-3xl text-purple-text mb-10"
+            className="text-xl md:text-3xl text-purple-text mb-4"
           >
             <span className="tok-fn">&gt;</span> {personal.roleShort}
           </motion.h2>
+
+          <motion.p
+            variants={fadeUpItem}
+            className="text-txt-bright/90 text-base md:text-lg mb-10 max-w-md"
+          >
+            {personal.tagline}
+          </motion.p>
 
           <motion.p variants={fadeUpItem} className="text-menu-text mb-2">
             <span className="tok-comment">{'// '}complete the game to know more about me</span>
@@ -65,9 +72,9 @@ export default function Hello() {
             <pre className="text-[12.5px] leading-6 whitespace-pre-wrap">
 <span className="tok-key">const</span> <span className="tok-var">developer</span> <span className="text-txt-bright">=</span> {'{'}
 {'\n'}  <span className="tok-name">name</span>: <span className="tok-str">&apos;Jasir Colovic&apos;</span>,
-{'\n'}  <span className="tok-name">role</span>: <span className="tok-str">&apos;Front-end &amp; DevOps&apos;</span>,
+{'\n'}  <span className="tok-name">role</span>: <span className="tok-str">&apos;AI Engineer&apos;</span>,
 {'\n'}  <span className="tok-name">location</span>: <span className="tok-str">&apos;Sarajevo, BiH&apos;</span>,
-{'\n'}  <span className="tok-name">stack</span>: [<span className="tok-str">&apos;React&apos;</span>, <span className="tok-str">&apos;Terraform&apos;</span>, <span className="tok-str">&apos;K8s&apos;</span>],
+{'\n'}  <span className="tok-name">stack</span>: [<span className="tok-str">&apos;LLMs&apos;</span>, <span className="tok-str">&apos;Python&apos;</span>, <span className="tok-str">&apos;Automation&apos;</span>],
 {'\n'}  <span className="tok-name">available</span>: <span className="tok-key">true</span>,
 {'\n'}{'}'}
             </pre>
