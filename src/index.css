@@ -5,133 +5,113 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* So smooth-scroll lands below the fixed nav */
-    scroll-padding-top: 6rem;
   }
 
   body {
-    @apply bg-paper text-ink font-serif antialiased;
+    @apply bg-bg text-txt font-mono antialiased;
     overflow-x: hidden;
   }
 
   ::selection {
-    @apply bg-accent text-paper;
+    @apply bg-neon/40 text-txt-bright;
+  }
+
+  /* Custom scrollbar — editor feel */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #010c15;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e2d3d;
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #607b96;
   }
 }
 
 @layer components {
-  /* Paper grain overlay */
-  .paper-grain::before {
+  /* Code syntax helper classes */
+  .tok-comment { @apply text-txt; }
+  .tok-key { @apply text-neon; }
+  .tok-var { @apply text-purple-text; }
+  .tok-fn { @apply text-green; }
+  .tok-str { @apply text-orange; }
+  .tok-name { @apply text-green; }
+  .tok-tag { @apply text-purple-text; }
+
+  /* Panels with the 1px editor border */
+  .panel-border { @apply border border-line rounded-lg; }
+
+  /* Dotted / dashed connector line used across the template */
+  .rule-dash {
+    background-image: linear-gradient(to right, #1e2d3d 50%, transparent 50%);
+    background-size: 8px 1px;
+    background-repeat: repeat-x;
+  }
+
+  /* Blinking cursor block */
+  .cursor-block::after {
     content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.45;
-    mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.08  0 0 0 0 0.07  0 0 0 0 0.06  0 0 0 0.35 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
-  }
-
-  /* Section label with accent rule */
-  .section-label {
-    @apply font-mono text-[0.72rem] tracking-[0.18em] uppercase text-muted flex items-center gap-3 mb-8;
-  }
-  .section-label::before {
-    content: '';
-    @apply w-8 h-px bg-accent;
-  }
-
-  /* Reveal animation */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
-                transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-  .reveal.on {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Hero word rise */
-  .hero-word {
     display: inline-block;
-    opacity: 0;
-    transform: translateY(40px);
-    animation: rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  }
-  .hero-word:nth-child(1) { animation-delay: 0.15s; }
-  .hero-word:nth-child(2) { animation-delay: 0.3s; }
-
-  .fade-in-delayed {
-    opacity: 0;
-    animation: fade-in 1s ease forwards;
+    width: 0.6ch;
+    height: 1.05em;
+    margin-left: 2px;
+    background: #607b96;
+    transform: translateY(0.15em);
+    @apply animate-blink;
   }
 
-  /* Role hover effect */
-  .role-card {
-    @apply grid gap-8 py-10 border-t border-rule transition-[padding] duration-500 ease-out;
-    grid-template-columns: 80px 1fr;
+  /* Nav tab underline */
+  .tab-link {
+    @apply relative px-5 md:px-6 h-full flex items-center text-menu-text border-r border-line transition-colors duration-200 hover:text-txt-bright;
   }
-  .role-card:hover {
-    padding-left: 1rem;
+  .tab-link::after {
+    content: '';
+    @apply absolute left-0 right-0 bottom-0 h-[2px] bg-orange scale-x-0 transition-transform duration-200 origin-left;
   }
-  .role-card:hover .role-num {
-    @apply text-accent;
+  .tab-link.active {
+    @apply text-txt-bright;
   }
-  @media (max-width: 900px) {
-    .role-card {
-      grid-template-columns: 1fr;
-      gap: 0.8rem;
-    }
+  .tab-link.active::after {
+    @apply scale-x-100;
   }
 
-  /* Arrow list marker */
-  .arrow-list li {
-    @apply relative pl-6 mb-3;
+  /* Reveal on load */
+  .reveal-up { @apply opacity-0 animate-fade-up; }
+  .reveal-in { @apply opacity-0 animate-fade-in; }
+
+  /* Line-numbered code block */
+  .code-lines {
+    counter-reset: line;
   }
-  .arrow-list li::before {
-    content: '→';
-    @apply absolute left-0 text-accent font-mono;
+  .code-lines > .cl {
+    @apply grid gap-6 leading-relaxed;
+    grid-template-columns: 2ch 1fr;
+  }
+  .code-lines > .cl::before {
+    counter-increment: line;
+    content: counter(line);
+    @apply text-line-soft/60 text-right select-none;
   }
 
-  /* Education row hover */
-  .edu-row {
-    @apply grid gap-8 py-7 border-b border-rule items-baseline transition-colors duration-300;
-    grid-template-columns: 1fr 2fr 1fr;
-  }
-  .edu-row:hover {
-    @apply bg-paper-warm;
-  }
-  @media (max-width: 720px) {
-    .edu-row {
-      grid-template-columns: 1fr;
-      gap: 0.3rem;
-    }
+  /* Buttons */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 rounded border border-line-soft/60 px-4 py-2 text-txt-bright hover:bg-panel-2 transition-colors;
   }
 
-  /* Skill list item dashed separator */
-  .skill-li {
-    @apply font-serif text-[1.1rem] py-[0.45rem] cursor-default transition-all duration-300;
-    border-bottom: 1px dashed rgba(243, 239, 230, 0.15);
+  /* Form inputs (Contact) */
+  .input {
+    @apply w-full bg-panel border border-line rounded-md px-3.5 py-2.5 text-txt-bright text-sm outline-none transition-colors;
+    font-family: inherit;
   }
-  .skill-li:last-child {
-    border-bottom: none;
+  .input::placeholder {
+    @apply text-placeholder-gray;
   }
-  .skill-li:hover {
-    @apply pl-3 text-accent-soft;
-  }
-}
-
-@keyframes rise {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fade-in {
-  to {
-    opacity: 1;
+  .input:focus {
+    @apply border-line-soft;
   }
 }

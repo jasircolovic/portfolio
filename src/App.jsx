@@ -1,23 +1,30 @@
-import Nav from './components/Nav'
-import Hero from './components/Hero'
-import Marquee from './components/Marquee'
-import Work from './components/Work'
-import Skills from './components/Skills'
-import Education from './components/Education'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import Layout from './components/Layout'
+import Hello from './pages/Hello'
+import About from './pages/About'
+import Projects from './pages/Projects'
+import Contact from './pages/Contact'
 
 export default function App() {
+  const location = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
+
   return (
-    <div className="paper-grain">
-      <Nav />
-      <Hero />
-      <Marquee />
-      <Work />
-      <Skills />
-      <Education />
-      <Contact />
-      <Footer />
-    </div>
+    <Layout>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Hello />} />
+          <Route path="/about-me" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact-me" element={<Contact />} />
+          <Route path="*" element={<Hello />} />
+        </Routes>
+      </AnimatePresence>
+    </Layout>
   )
 }

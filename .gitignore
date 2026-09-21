@@ -3,6 +3,9 @@ dist
 dist-ssr
 *.local
 
+# Local Claude Code harness files
+.claude/
+
 .DS_Store
 .vscode/*
 !.vscode/extensions.json

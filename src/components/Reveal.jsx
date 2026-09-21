@@ -1,15 +1,18 @@
-import useReveal from '../hooks/useReveal'
+import { motion } from 'framer-motion'
 
-export default function Reveal({ as: Tag = 'div', className = '', delay = 0, children, ...rest }) {
-  const [ref, shown] = useReveal()
+// Scroll-triggered reveal. Animates once when it enters the viewport.
+export default function Reveal({ children, className = '', delay = 0, as = 'div', ...rest }) {
+  const M = motion[as] || motion.div
   return (
-    <Tag
-      ref={ref}
-      className={`reveal ${shown ? 'on' : ''} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+    <M
+      className={className}
+      initial={{ opacity: 0, y: 22 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.5, delay, ease: [0.2, 0.8, 0.2, 1] }}
       {...rest}
     >
       {children}
-    </Tag>
+    </M>
   )
 }
