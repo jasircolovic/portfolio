@@ -14,7 +14,7 @@ export const personal = {
   linkedin: 'https://linkedin.com/in/jasir-colovic',
   linkedinHandle: 'jasir-colovic',
   intro:
-    'Software engineering graduate with hands-on experience in DevOps, Linux, and cloud infrastructure (AWS/GCP, Terraform, Docker, Kubernetes), computer networking, and technical support — skilled in CI/CD automation, system monitoring, and shipping features directly with customers under tight deadlines. AWS Certified Solutions Architect.',
+    'AI Engineer building LLM-powered solutions that automate real business work. Backed by a strong software-engineering and DevOps foundation — AWS/GCP, Terraform, Docker, Kubernetes, and CI/CD automation — and experience shipping customer-facing features end-to-end. AWS Certified Solutions Architect.',
 }
 
 export const navLinks = [
@@ -258,15 +258,16 @@ export const aboutSections = [
         key: 'experience',
         label: 'experience',
         body: [
-          'Software engineer with hands-on experience across the stack —',
-          'from React front-ends to Terraform-provisioned cloud infrastructure,',
-          'plus computer networking and hands-on technical support.',
+          'AI Engineer building LLM-powered solutions that automate real',
+          'business work — from customer-facing product features to the',
+          'pipelines and cloud infrastructure that ship them.',
           '',
           'Most recently an AI Solutions Engineering Intern at Brookstone Partners',
-          '(NYC, remote), working forward-deployed with customers to ship features',
-          'end-to-end. Before that: DevOps Intern at Bloomteq (CI/CD, AWS/GCP,',
-          'Docker, Kubernetes), a full-stack student platform for Deutsche Telekom',
-          '(via Ekipa), and a responsive React UI for Linktastic (Ecronix).',
+          '(NYC, remote), working forward-deployed with customers to turn their',
+          'needs into LLM features end-to-end. That sits on a strong engineering',
+          'base: DevOps at Bloomteq (CI/CD, AWS/GCP, Docker, Kubernetes), a',
+          'full-stack platform for Deutsche Telekom (via Ekipa), and a React UI',
+          'for Linktastic (Ecronix) — plus networking and hands-on tech support.',
           '',
           'Graduated B.S. Software Engineering from IUS (2026); thesis on resilient',
           'dual-core network design for SMEs. AWS Certified Solutions Architect.',
